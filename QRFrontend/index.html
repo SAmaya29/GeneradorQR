@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos.css">
+    <title>Generador de Códigos QR</title>
+</head>
+
+<body>
+    <h1>Generador de Códigos QR</h1>
+    <form id="qrForm">
+        <input type="text" id="urlInput" placeholder="Pega tu enlace aquí" required>
+        <button type="submit">Generar QR</button>
+    </form>
+    <div id="qrResult"></div>
+
+    <script>
+        document.getElementById('qrForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const url = encodeURIComponent(document.getElementById('urlInput').value);
+            // Cambia la URL por la de tu backend si es necesario
+            const qrApiUrl = `http://127.0.0.1:8000/generateQR/?url=${url}`;
+            document.getElementById('qrResult').innerHTML = `
+                <img src="${qrApiUrl}" alt="QR generado">
+                <br>
+                <a href="#" id="downloadQR">Descargar QR</a>`;
+            document.getElementById('downloadQR').addEventListener('click', function (event) {
+                event.preventDefault();
+                fetch(qrApiUrl)
+                    .then(response => response.blob())
+                    .then(blob => {
+                        const urlBlob = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = urlBlob;
+                        a.download = 'codigo_qr.png';
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        URL.revokeObjectURL(urlBlob);
+                    });
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+
+# Ignorar entorno virtual
+entornoQR/
+
+# Archivos y carpetas de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Archivos de configuración de VSCode
+.vscode/
+
+# Archivos del sistema
+*.DS_Store
+Thumbs.db
