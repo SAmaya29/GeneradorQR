@@ -21,7 +21,7 @@
             e.preventDefault();
             const url = encodeURIComponent(document.getElementById('urlInput').value);
             // Cambia la URL por la de tu backend si es necesario
-            const qrApiUrl = `http://127.0.0.1:8000/generateQR/?url=${url}`;
+            const qrApiUrl = `https://generadorqr-7o6h.onrender.com/generateQR/?url=${url}`;
             document.getElementById('qrResult').innerHTML = `
                 <img src="${qrApiUrl}" alt="QR generado">
                 <br>
